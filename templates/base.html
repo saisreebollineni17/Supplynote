@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css"></link>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+            <div class="container-fluid">
+              <span class="navbar-brand">URL Shortner</span>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/dashboard">Home
+                      <span class="visually-hidden">(current)</span>
+                    </a>
+                  </li>
+                  
+                </ul>
+                <div class="d-flex">
+                  {% if user %}
+                  <a class="btn btn-secondary my-2 my-sm-0 disabled">{{ user.username }}</a>&ensp;
+                  <a class="btn btn-danger my-2 my-sm-0" href="/logout">Logout</a>
+                  {% else %}
+                  <a class="btn btn-secondary my-2 my-sm-0" href="/login">Login</a>&ensp;
+                  <a class="btn btn-secondary my-2 my-sm-0" href="/signup">Sign Up</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </nav>
+    </div>
+    <div>
+        
+        {% block content %}
+          URL Shortening System.
+        {% endblock %}
+    </div>
+</body>
+</html>

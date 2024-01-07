@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="padding: 30px; border: 1px solid lightgray; border-radius: 10px; width: 500px; height: auto; margin: auto; margin-top: 30px; ">
+<h4>Login Page</h4>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {% for field in form %}
+                    {% if field.name=="Login" or field.name=="csrf_token" %}
+                    <br/>
+                    {% else %}
+                    <label class="col-form-label mt-4" for="inputDefault">{{ field.label }}</label>
+                    {% endif %}  
+
+                    <input type="{{ field.widget.input_type }}"
+                    name="{{ field.name }}"
+                    class=" {% if field.name=="Login" %}  
+                    btn btn-dark
+                    {% else %} form-control 
+                    {% endif %}" 
+                    placeholder="{{ field.name }}"
+                    value="{% if field.name=="Login" %}Login{% endif %}"
+                    {% if field.required %}required{% endif %}>
+                {% endfor %}
+                <br/>
+</form>
+</div>
+
+{% endblock %}

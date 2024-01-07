@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    {% block content %}
+    <div style="padding: 30px;">
+        <h4>Hello <strong>{{ user.first_name }}</strong>,</h4>
+        <br/>
+        <div style="padding: 30px; border: 1px solid lightgray; border-radius: 10px;">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-dismissible alert-danger">
+                    <strong>{{ message }}</strong>
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <form class="form-group"method="POST">
+                <label class="form-label" for="original_url">Enter Original URL</label>
+                <input class="form-control" placeholder="Enter your URL" type="text" name="original_url" id="original_url" required>
+                <br/>
+                <button class="btn btn-success" value="shorten_url" name="shorten_url" type="submit">Shorten URL</button>
+                <button class="btn btn-outline-secondary" name="view_analytics" value="view_analytics" type="submit">View Analytics</button>
+            </form>
+            <br/>
+
+            {% if short_url %}
+            <div class="alert alert-dismissible alert-success">
+                <strong>Shortened URL</strong> - <a class="alert-link" href="{{ url_for('redirect_to_original', short_url=short_url) }}" >{{ url_for('redirect_to_original', short_url=short_url) }}</a>
+            </div>
+            {% endif %}
+            <br/>
+            {% if url %}
+                <p>Original URL - {{ url.original_url}}</p>
+                <p>Shortened URL - <a class="alert-link" href="{{ url_for('redirect_to_original', short_url=url.short_url) }}" >{{ url_for('redirect_to_original', short_url=url.short_url) }}</a></p>
+                <p>Number of Clicks - {{ url.clicks }}</p>
+                <p>Last Clicked - {{ url.last_click_at }}</p>
+                <p>Browsers Used - {{ url.browsers }}</p>
+            {% endif %}
+
+        <div>
+    </div>
+    {% endblock %}
+</body>
+</html>
